@@ -1,4 +1,5 @@
-let pravo= true
+let pravo= true 
+var dec = false
 
 var config = {
     type: Phaser.AUTO,
@@ -23,7 +24,7 @@ var isRight = false;
 var game = new Phaser.Game(config);
 
 function preload() {
-    this.load.spritesheet("nlo", "./animation/NLO.png", { frameWidth: 36, frameHeight: 30 })
+    this.load.spritesheet("nlo", "./animation/NLO.png", { frameWidth: 600, frameHeight: 600 })
     this.load.image("Run", "./animation/Run.png")
     this.load.image("povoska", "./img/povoska.png")
     this.load.image("ground", "./img/Ground.png")
@@ -39,11 +40,8 @@ function create() {
 
     this.add.image(200, 300, 'Fon');
 
-
-    //nlo = this.physics.add.sprite(100, 450, 'nlo').setScale(0.5);
-    
-    
-  //  Fox = this.physics.add.sprite(100, 450, 'Fox').setScale(0.15);
+    prot=this.physics.add.staticGroup();
+    nlo=prot.create(100, 280, 'nlo').setScale(0.3);
 
     player = this.physics.add.sprite(100, 450, 'Walk');
     platforms = this.physics.add.staticGroup();
@@ -80,13 +78,20 @@ function create() {
         frameRate: 10,
         repeat: -1
     });
+    
     this.anims.create({
         key: 'nlo',
-        frames: this.anims.generateFrameNumbers('Fox', { start: 0, end: 6 }),
+        frames: this.anims.generateFrameNumbers('nlo', { start: 0, end: 1 }),
         frameRate: 4,
         repeat: -1
-    })
-        
+    });
+
+    this.anims.create({
+        key: 'nlo1',
+        frames: this.anims.generateFrameNumbers('nlo', { start: 0, end: 1 }),
+        frameRate: 4,
+        repeat: -1
+    });
 
     this.anims.create({
         key: 'Fox1',
@@ -94,7 +99,7 @@ function create() {
         frameRate: 4,
         repeat: -1
     });
-    nlo = this.physics.add.sprite(100, 450, 'nlo').setScale(0.5);
+    
 
     cursors = this.input.keyboard.createCursorKeys();
     this.cameras.main.setBounds(0, 0, 400 * 1.5, 450*1.17)
@@ -105,7 +110,7 @@ function create() {
 
 function update() {
 
-    if(fox.x==99 || fox.x==300){
+    if(fox.x==10 || fox.x==600){
         pravo=!pravo
 
     }
@@ -133,5 +138,12 @@ function update() {
         player.setVelocityY(-200);
     }
     player.scaleX = (isRight) ? -1 : 1;
-
 }
+
+    nlo.anims.play('nlo');
+
+
+
+
+    
+
