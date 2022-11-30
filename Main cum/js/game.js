@@ -140,7 +140,6 @@ function update() {
     player.scaleX = (isRight) ? -1 : 1;
 }
 
-    nlo.anims.play('nlo');
 
 
 
