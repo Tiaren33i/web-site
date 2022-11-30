@@ -23,6 +23,7 @@ var isRight = false;
 var game = new Phaser.Game(config);
 
 function preload() {
+    this.load.spritesheet("nlo", "./animation/NLO.png", { frameWidth: 36, frameHeight: 30 })
     this.load.image("Run", "./animation/Run.png")
     this.load.image("povoska", "./img/povoska.png")
     this.load.image("ground", "./img/Ground.png")
@@ -39,8 +40,9 @@ function create() {
     this.add.image(200, 300, 'Fon');
 
 
-
-
+    //nlo = this.physics.add.sprite(100, 450, 'nlo').setScale(0.5);
+    
+    
   //  Fox = this.physics.add.sprite(100, 450, 'Fox').setScale(0.15);
 
     player = this.physics.add.sprite(100, 450, 'Walk');
@@ -78,6 +80,13 @@ function create() {
         frameRate: 10,
         repeat: -1
     });
+    this.anims.create({
+        key: 'nlo',
+        frames: this.anims.generateFrameNumbers('Fox', { start: 0, end: 6 }),
+        frameRate: 4,
+        repeat: -1
+    })
+        
 
     this.anims.create({
         key: 'Fox1',
@@ -85,6 +94,7 @@ function create() {
         frameRate: 4,
         repeat: -1
     });
+    nlo = this.physics.add.sprite(100, 450, 'nlo').setScale(0.5);
 
     cursors = this.input.keyboard.createCursorKeys();
     this.cameras.main.setBounds(0, 0, 400 * 1.5, 450*1.17)
