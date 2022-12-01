@@ -24,7 +24,7 @@ var isRight = false;
 var game = new Phaser.Game(config);
 
 function preload() {
-    this.load.spritesheet("nlo", "./animation/NLO.png", { frameWidth: 600, frameHeight: 600 })
+    this.load.image("nlo", "./animation/nlo.png")
     this.load.image("Run", "./animation/Run.png")
     this.load.image("povoska", "./img/povoska.png")
     this.load.image("ground", "./img/Ground.png")
@@ -79,19 +79,19 @@ function create() {
         repeat: -1
     });
     
-    this.anims.create({
-        key: 'nlo',
-        frames: this.anims.generateFrameNumbers('nlo', { start: 0, end: 1 }),
-        frameRate: 4,
-        repeat: -1
-    });
+    // this.anims.create({
+    //     key: 'nlo',
+    //     frames: this.anims.generateFrameNumbers('nlo', { start: 0, end: 1 }),
+    //     frameRate: 4,
+    //     repeat: -1
+    // });
 
-    this.anims.create({
-        key: 'nlo1',
-        frames: this.anims.generateFrameNumbers('nlo', { start: 0, end: 1 }),
-        frameRate: 4,
-        repeat: -1
-    });
+    // this.anims.create({
+    //     key: 'nlo1',
+    //     frames: this.anims.generateFrameNumbers('nlo', { start: 1, end: 0 }),
+    //     frameRate: 4,
+    //     repeat: -1
+    // });
 
     this.anims.create({
         key: 'Fox1',
@@ -138,11 +138,29 @@ function update() {
         player.setVelocityY(-200);
     }
     player.scaleX = (isRight) ? -1 : 1;
+   // nlo.play("nlo",true);
+
+   if (nlo.x!=Math.floor(player.x)){
+    if (nlo.x>player.x){
+        nlo.x--;
+    } else{
+        nlo.x++;
+    }
+    
+    }
+    else{
+     //  console.log('You detected');
+     console.log(player.y);
+        if (player.y>240){
+            player.setVelocityY(-40);
+        }
+    }
+    if(Math.floor(player.y)== 300  ){
+        alert("Game Over!")
+    }
+
 }
 
 
 
-
-
-    
 
