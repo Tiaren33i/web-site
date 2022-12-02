@@ -24,6 +24,8 @@ var isRight = false;
 var game = new Phaser.Game(config);
 
 function preload() {
+    this.load.image("star", "./animation/star.png")
+    this.load.image("bomb", "./animation/bomb.png")
     this.load.image("nlo", "./animation/nlo.png")
     this.load.image("Run", "./animation/Run.png")
     this.load.image("povoska", "./img/povoska.png")
@@ -37,11 +39,11 @@ function preload() {
 }
 
 function create() {
-
+    
     this.add.image(200, 300, 'Fon');
 
     prot=this.physics.add.staticGroup();
-    nlo=prot.create(100, 280, 'nlo').setScale(0.3);
+    nlo=prot.create(100, 480, 'nlo').setScale(0.3);
 
     player = this.physics.add.sprite(100, 450, 'Walk');
     platforms = this.physics.add.staticGroup();
@@ -57,6 +59,7 @@ function create() {
     player.setCollideWorldBounds(true);
     
 
+    starfall=this.physics.add.staticGroup();
 
     this.physics.add.collider(player, platforms);
     this.anims.create({
@@ -79,20 +82,6 @@ function create() {
         repeat: -1
     });
     
-    // this.anims.create({
-    //     key: 'nlo',
-    //     frames: this.anims.generateFrameNumbers('nlo', { start: 0, end: 1 }),
-    //     frameRate: 4,
-    //     repeat: -1
-    // });
-
-    // this.anims.create({
-    //     key: 'nlo1',
-    //     frames: this.anims.generateFrameNumbers('nlo', { start: 1, end: 0 }),
-    //     frameRate: 4,
-    //     repeat: -1
-    // });
-
     this.anims.create({
         key: 'Fox1',
         frames: this.anims.generateFrameNumbers('Fox', { start: 0, end: 6 }),
@@ -106,9 +95,12 @@ function create() {
 
     this.physics.world.setBounds(0, 0, 400 * 1.5, 450 * 2)
     this.cameras.main.startFollow(player, true, 2, 2)
+console.log(this);
+    generateLocation();
 }
 
 function update() {
+
 
     if(fox.x==10 || fox.x==600){
         pravo=!pravo
@@ -146,16 +138,15 @@ function update() {
     } else{
         nlo.x++;
     }
-    
+
     }
     else{
-     //  console.log('You detected');
-     console.log(player.y);
+        
         if (player.y>240){
             player.setVelocityY(-40);
         }
     }
-    if(Math.floor(player.y)== 300  ){
+    if(Math.floor(player.y)== 250  ){
         alert("Game Over!")
     }
 
@@ -164,3 +155,111 @@ function update() {
 
 
 
+function generateLocation(x=0) {
+    var max=8;
+    var binMax=dec2bin(max);
+    setTimeout(() => {
+        let bin=String(dec2bin(x));
+        if (bin.length<binMax.length){
+
+            bin='0'.repeat(binMax.length-bin.length)+bin;
+
+        }
+        
+        [...bin].forEach((char,i) => {
+            let x=nlo.x+i*70;
+            generateSkyFalls(char,x);
+        });
+           
+        
+
+        x++;
+        if (x>max){
+            x=0;
+        }
+        generateLocation(x)
+    }, 5000);
+    
+}
+
+function dec2bin(dec) {
+  return (dec >>> 0).toString(2);
+}
+
+function generateSkyFalls(char,x) {
+
+    let name='';
+    let scene=game.scene.scenes[0];
+    if (char=="0"){
+        name='star';
+    }
+
+    if (char=="1"){
+        name='bomb';
+
+    }
+
+    let obj=scene.physics.add.sprite(x, 300, name);
+    
+    obj.setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
+    scene.physics.add.collider(platforms, obj);
+
+    scene.physics.add.overlap(player, obj, (char=="0")?collectStar:hitBomb, null, this);
+    
+    if ( name=='bomb'){
+        console.log(123);
+        scene.physics.add.overlap(platforms, obj, bombDisconnect, null, this);
+    }
+    
+
+}
+
+
+function collectStar (player, star)
+{
+   
+    star.disableBody(true, true);
+
+    // score += 10;
+    // scoreText.setText('Score: ' + score);
+
+    // if (stars.countActive(true) === 0)
+    // {
+    //     stars.children.iterate(function (child) {
+
+    //         child.enableBody(true, child.x, 0, true, true);
+
+    //     });
+
+    //     var x = (player.x < 400) ? Phaser.Math.Between(400, 800) : Phaser.Math.Between(0, 400);
+
+    //     var bomb = bombs.create(x, 16, 'bomb');
+    //     bomb.setBounce(1);
+    //     bomb.setCollideWorldBounds(true);
+    //     bomb.setVelocity(Phaser.Math.Between(-200, 200), 20);
+
+    // }
+
+}
+function hitBomb (player, bomb)
+{
+
+    let scene=game.scene.scenes[0];
+
+    scene.physics.pause();
+
+    player.setTint(0xff0000);
+
+    gameOver = true;
+}
+
+function bombDisconnect(zemlya,bomb) {
+
+    setTimeout(() => {
+        console.log(bomb)
+        bomb.disableBody(true, true); 
+    }, 100);
+
+    
+    
+}
