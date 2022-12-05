@@ -1,0 +1,15 @@
+/home/user/Рабочий стол/web-site/HelloWorld/bin/Debug/net6.0/HelloWorld
+/home/user/Рабочий стол/web-site/HelloWorld/bin/Debug/net6.0/HelloWorld.deps.json
+/home/user/Рабочий стол/web-site/HelloWorld/bin/Debug/net6.0/HelloWorld.runtimeconfig.json
+/home/user/Рабочий стол/web-site/HelloWorld/bin/Debug/net6.0/HelloWorld.dll
+/home/user/Рабочий стол/web-site/HelloWorld/bin/Debug/net6.0/HelloWorld.pdb
+/home/user/Рабочий стол/web-site/HelloWorld/obj/Debug/net6.0/HelloWorld.csproj.AssemblyReference.cache
+/home/user/Рабочий стол/web-site/HelloWorld/obj/Debug/net6.0/HelloWorld.GeneratedMSBuildEditorConfig.editorconfig
+/home/user/Рабочий стол/web-site/HelloWorld/obj/Debug/net6.0/HelloWorld.AssemblyInfoInputs.cache
+/home/user/Рабочий стол/web-site/HelloWorld/obj/Debug/net6.0/HelloWorld.AssemblyInfo.cs
+/home/user/Рабочий стол/web-site/HelloWorld/obj/Debug/net6.0/HelloWorld.csproj.CoreCompileInputs.cache
+/home/user/Рабочий стол/web-site/HelloWorld/obj/Debug/net6.0/HelloWorld.dll
+/home/user/Рабочий стол/web-site/HelloWorld/obj/Debug/net6.0/refint/HelloWorld.dll
+/home/user/Рабочий стол/web-site/HelloWorld/obj/Debug/net6.0/HelloWorld.pdb
+/home/user/Рабочий стол/web-site/HelloWorld/obj/Debug/net6.0/HelloWorld.genruntimeconfig.cache
+/home/user/Рабочий стол/web-site/HelloWorld/obj/Debug/net6.0/ref/HelloWorld.dll
