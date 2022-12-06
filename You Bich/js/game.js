@@ -3,6 +3,7 @@ var config = {
     type: Phaser.AUTO,
     width: 800,
     height: 600,
+    scene:[1,],
     physics: {
         default: 'arcade',
         arcade: {
@@ -103,4 +104,8 @@ function update ()
         
         player.setVelocityY(-330);
     }
+    // console.log(player.x,player.y)
 }
+
+
+//784 159
